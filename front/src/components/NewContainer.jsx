@@ -21,10 +21,10 @@ export const NewContainer = () => {
     <aside className="py-[28px] px-[20px] text-cyan-900 flex-none mb-[60px] md:w-[350px] md:mb-0 lg:w-2/5 ">
       <div >
         <div className='flex-1 py-6'>
-          <h2 className='text-[40px]  leading-none font-bold sm:text-[58px]'>La app para enviar a cualquier lugar</h2>
+          <h2 className='text-[30px]  leading-none font-bold sm:text-[45px]'>CrimeMapper allows users to report crimes in real time, helping create safer communities.</h2>
         </div>
         <div className='flex flex-col  pt-2 '>
-          <p className='mb-10 text-[13px] sm:text-[17px] '>Inicia sesion para acceder a tu cuenta.</p>
+          <p className='mb-10 text-[13px] sm:text-[17px] '>Log in to access the map.</p>
 
           <SignedOut>
             <SignInButton mode='modal' forceRedirectUrl='/Panel'>

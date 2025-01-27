@@ -57,10 +57,10 @@ export function Booking() {
   return (
     <div>
       <div className='p-5'>
-        <h2 className=' text-[20px] font-semibold'>Get a ride</h2>
+        <h2 className=' text-[20px] font-semibold'>Report a crime</h2>
 
         <div className='border-[1px] p-5 rounded-md' >
-          <DateTimePicker label="Escoja fecha y hora"
+          <DateTimePicker label="Pick date and time"
             value={date}
             onChange={(newValue) => setDate(newValue)} />
           <AutoCompleteAddres />

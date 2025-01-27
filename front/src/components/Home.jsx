@@ -1,7 +1,7 @@
 import { Header } from "./Header"
 import { MainArticle } from "./MainArticle"
 import { NewContainer } from "./NewContainer"
-import { ArticlesContainer } from "./ArticlesContainer"
+
 
 
 import imageDesktop from '../assets/images/image-web-3-desktop-.jpg'
@@ -30,8 +30,7 @@ export function Home() {
           <MainArticle imagen={imageDesktop} />
 
         </div>
-        <ArticlesContainer />
-        
+       
        
         
       </main>
