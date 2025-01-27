@@ -1,0 +1,42 @@
+{
+  "name": "challenge-27-news-homepage",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@clerk/clerk-react": "^5.2.8",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^5.16.5",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@mui/x-date-pickers": "^7.11.1",
+    "@react-google-maps/api": "^2.19.3",
+    "axios": "^1.7.7",
+    "dayjs": "^1.11.12",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-google-places-autocomplete": "^4.0.1",
+    "react-icons": "^5.2.1",
+    "react-router-dom": "^6.23.1",
+    "styled-components": "^6.1.12"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.5.3"
+  }
+}
