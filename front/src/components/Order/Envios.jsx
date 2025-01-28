@@ -1,5 +1,5 @@
 import { Header } from "../Header";
-import { ArticlesContainer } from "../ArticlesContainer";
+
 import OrdersList from './OrdersList';
 import { useSession } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
@@ -69,7 +69,7 @@ export function Envios() {
         {/* Lista de pedidos */}
         <OrdersList orders={orders} onDelete={deleteOrder} />
       </div>
-      <ArticlesContainer />
+      
     </main>
   );
 }

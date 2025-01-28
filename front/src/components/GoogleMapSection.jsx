@@ -25,7 +25,7 @@ function GoogleMapSection() {
 
 
   const { source, setSource } = useContext(SourceContext);
-  const { destination, setDestination } = useContext(DestinationContext)
+ 
   const { waypoint, setWaypoint } = useContext(WaypointContext)
 
   const [center, setCenter] = useState({
@@ -49,55 +49,16 @@ function GoogleMapSection() {
       })
     }
 
-    if (source.length != [] && destination.length != []) {
-      directionRoute();
-    }
+    
   }, [source])
 
-  useEffect(() => {
-    if (destination?.length != [] && map) {
-      setCenter({
-        lat: destination.lat,
-        lng: destination.lng
-      })
-    }
-
-    if (source.length != [] && destination.length != []) {
-      directionRoute();
-    }
-  }, [destination])
+  
 
 
 
   const [map, setMap] = React.useState(null)
-  const [directionRoutePoints, setDirectionRoutePoints] = useState([]);
-
-  const directionRoute = () => {
-    const DirectionsService = new google.maps.DirectionsService();
-    DirectionsService.route({
-      origin: { lat: source.lat, lng: source.lng },
-      destination: { lat: destination.lat, lng: destination.lng },
-      waypoints: waypoint.map((wp) => ({
-        location: wp.name,
-        stopover: true,
-      })),
-      travelMode: google.maps.TravelMode.DRIVING
-    }, (result, status) => {
-      if (status === google.maps.DirectionsStatus.OK) {
-
-
-        setDirectionRoutePoints(result)
-
-
-
-      }
-      else {
-        console.error('Error')
-
-
-      }
-    })
-  }
+  
+  
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -159,26 +120,7 @@ function GoogleMapSection() {
       </Marker> : null}
 
 
-      {destination.length != [] ? <Marker
-        position={{ lat: destination.lat, lng: destination.lng }}
-        icon={{
-          url: destinationIcon,
-          scaledSize: {
-            width: 20,
-            height: 20
-          }
-        }}
-      >
-        <OverlayView
-          position={{ lat: destination.lat, lng: destination.lng }}
-          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-        >
-          <div className='p-2 bg-white font-bold inline-block'>
-            <p className='text-black text-[18px]'>{destination.label}</p>
-          </div>
-        </OverlayView>
-
-      </Marker> : null}
+      
 
       {waypoint.length !== 0 && waypoint.map((waypoint, index) => (
         <Marker
@@ -203,16 +145,7 @@ function GoogleMapSection() {
         </Marker>
       ))}
 
-      <DirectionsRenderer
-        directions={directionRoutePoints}
-        options={{
-          polylineOptions: {
-            strokeColor: '#000',
-            strokeWeight: 5
-          },
-          suppressMarkers: true
-        }}
-      />
+      
 
 
     </GoogleMap>
