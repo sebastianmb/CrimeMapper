@@ -16,22 +16,11 @@ function AutoCompleteAddres() {
     const { source, setSource } = useContext(SourceContext);
     const { destination, setDestination } = useContext(DestinationContext);
 
-    const [counter, setCounter] = useState(1);
+   
 
     
     
-    const [componentes, setComponentes] = useState([]);
-
-    const agregarComponente = () => {
-        // Genera un nuevo componente (puedes personalizar esto según tus necesidades)
-        const nuevoComponente = <Waypoints key={componentes.length} cantidad ={counter} />;
-        
-            setCounter((prevCounter) => prevCounter + 1);
-          
-        // Agrega el nuevo componente a la lista
-        setComponentes([...componentes, nuevoComponente]);
-    };
-
+    
 
 
     const getLatAndLngSource = (place) => {
@@ -55,27 +44,7 @@ function AutoCompleteAddres() {
         })
 
     }
-    const getLatAndLngDestination = (place) => {
-
-        const placeId = place.value.place_id;
-        const service = new google.maps.places.PlacesService(document.createElement('div'));
-        service.getDetails({ placeId }, (place, status) => {
-            if (status === 'OK' && place.geometry && place.geometry.location) {
-
-                const newDestination = {
-                    lat: place.geometry.location.lat(),
-                    lng: place.geometry.location.lng(),
-                    name: place.formatted_address,
-                    label: place.name
-                };
-
-                setDestination(newDestination)
-                // Ahora puedes acceder a source y destination aquí
-
-            }
-        })
-
-    }
+   
 
    
 
@@ -83,7 +52,7 @@ function AutoCompleteAddres() {
     return (
         <div className='mt-5'>
             <div className='relative'>
-                <label className='text-gray-400'>Where From?</label>
+                <label className='text-gray-400'>Set Location</label>
                 <div className='flex items-center gap-4 bg-white p-1 border-[1px] w-full rounded-md outline-none
                             focus:border-cyan-900'>
                     <img src={locationIcon} alt="Ubicación" className="h-4 w-4" />
@@ -96,7 +65,7 @@ function AutoCompleteAddres() {
                                 getLatAndLngSource(place);
                                 setValueSource(place)
                             },
-                            placeholder: 'Pickup Location',
+                            placeholder: 'Enter the address or tap on the map',
                             isClearable: true,
                             className: 'w-full',
                             components: {
@@ -111,50 +80,11 @@ function AutoCompleteAddres() {
                             }
                         }}
                     />
-                    <button onClick={agregarComponente}>
-                        <img src={agregar} alt="Agregar" className="h-5 w-6" />
-                    </button>
+                    
                 </div>
-                { componentes.map((componente, index) => (
-                    <div key={index}>{componente}</div>
-                ))}
+                
 
             </div>
-            <div className='mt-3'>
-                <label className='text-gray-400'>Where To?</label>
-                <div className='flex items-center gap-4 bg-white p-1 border-[1px] w-full rounded-md outline-none
-                            focus:border-cyan-900'>
-                    <img src={destinationIcon} alt="Destino" className="h-4 w-4" />
-                    <GooglePlacesAutocomplete
-
-                        selectProps={{
-                            valueDestination,
-                            onChange: (place) => {
-                                getLatAndLngDestination(place);
-                                setValueDestination(place)
-                            },
-                            placeholder: 'Pickup Destination',
-                            isClearable: true,
-                            className: 'w-full',
-                            components: {
-                                DropdownIndicator: false
-                            },
-                            styles: {
-                                control: (provide) => ({
-                                    ...provide,
-                                    backgroundColor: 'white',
-                                    border: 'none'
-                                })
-                            }
-                        }}
-                    />
-                </div>
-
-            </div>
-
-
-
-
         </div>
     )
 }

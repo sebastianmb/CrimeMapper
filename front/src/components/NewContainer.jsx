@@ -37,10 +37,10 @@ export const NewContainer = () => {
           <SignedIn>
             <Link to="/Panel" className='flex flex-col'>
               <button className='bg-cyan-900 w-[170px] h-[40px] rounded-[10px] text-OffWhite hover:bg-VeryDarkBlue' >Usuario</button>
-              <button className='mt-5 bg-cyan-900 w-[170px] h-[40px] rounded-[10px] text-OffWhite hover:bg-VeryDarkBlue'>Socio mensajero</button>
+              
             </Link>
           </SignedIn>
-          <button onClick={handleGetSessionId}>Obtener Token</button>
+          
         </div>
       </div>
     </aside>

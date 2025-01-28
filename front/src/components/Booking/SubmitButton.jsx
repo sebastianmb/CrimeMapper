@@ -8,11 +8,10 @@ import { useUser, useSession } from "@clerk/clerk-react";
 import axios from 'axios';
 
 const SubmitButton = ({ date, formData }) => {
-  const { mensaje, tamaño, peso, valor } = useContext(InfoPackageContext);
+  const { mensaje } = useContext(InfoPackageContext);
   const {  user } = useUser();
   const { source } = useContext(SourceContext);
-  const { destination } = useContext(DestinationContext);
-  const { waypoint } = useContext(WaypointContext);
+  
   const { session } = useSession()
 
   const handleSubmit = async () => {
@@ -21,17 +20,8 @@ const SubmitButton = ({ date, formData }) => {
     const payload = {
       pickupDateTime: formattedDate,
       pickupLocation: source,
-      waypoints: waypoint,
-      deliveryDestination: destination,
-      recipientName: formData.name,
-      recipientPhone: formData.telefono,
-      recipientEmail: formData.correo,
       courierInstructions: mensaje,
-      packageSize: tamaño,
-      declaredValue: valor,
-      packageWeight: peso,
       user: user.id,
-      precioEnvio:(13000 + 7000*waypoint.length).toFixed(0),
       status:'Pendiente'
     };
     console.log('Payload:', payload);
@@ -53,7 +43,7 @@ const SubmitButton = ({ date, formData }) => {
 
   return (
     <button className='p-3 bg-cyan-900 w-full mt-5 text-white rounded-lg' onClick={handleSubmit}>
-      Crear Pedido
+      Send Report
     </button>
   );
 };

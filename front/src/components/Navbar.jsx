@@ -24,14 +24,7 @@ export const Navbar = () => {
         <li className={`${menuClicked ? 'hidden' : ''} cursor-pointer sm:hidden  flex place-content-end`}>
           <img className='w-8 h-8 mb-[87px]' src={closeBtn} onClick={handleClick} alt="" />
         </li>
-        <SignedIn>
-          <Link to="/envios">
-        <li className='mb-8 sm:mb-0'>
-          <a className='px-[12px] py-[10px] rounded-[30px] hover:bg-cyan-700 sm:text-4'>Tus Envios</a>
-        </li>
-        </Link>
-        </SignedIn>
-
+        
         <li className='mb-8 sm:mb-0'>
           <SignedOut>
             <SignInButton mode='modal' forceRedirectUrl='/Panel'>Registrarse</SignInButton>

@@ -4,7 +4,7 @@ import { NewContainer } from "./NewContainer"
 
 
 
-import imageDesktop from '../assets/images/image-web-3-desktop-.jpg'
+import imageDesktop from '../assets/images/Imageprincipal.jpg'
 
 
 

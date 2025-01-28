@@ -94,7 +94,7 @@ function GoogleMapSection() {
 
 
     >
-      {console.log(pickLocation)}
+      {console.log("localizacion mapa",pickLocation)}
 
       {/*pickLocation && <Marker position={pickLocation} />*/}
 
@@ -114,6 +114,27 @@ function GoogleMapSection() {
         >
           <div className='p-2 bg-white font-bold inline-block'>
             <p className='text-black text-[18px]'>{source.label}</p>
+          </div>
+        </OverlayView>
+
+      </Marker> : null}
+
+      {pickLocation.length != [] ? <Marker
+        position={{ lat: pickLocation.lat, lng: pickLocation.lng }}
+        icon={{
+          url: locationIcon,
+          scaledSize: {
+            width: 20,
+            height: 20
+          }
+        }}
+      >
+        <OverlayView
+          position={{ lat: pickLocation.lat, lng: pickLocation.lng }}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+        >
+          <div className='p-2 bg-white font-bold inline-block'>
+            <p className='text-black text-[18px]'>{pickLocation.lng}</p>
           </div>
         </OverlayView>
 

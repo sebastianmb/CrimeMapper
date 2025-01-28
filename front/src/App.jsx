@@ -5,7 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { ClerkProvider } from '@clerk/clerk-react';
 import PrivateRoute from "./components/PrivateRoute";
-import { Envios } from "./components/Order/Envios";
+
 
 
 export function App() {
@@ -21,7 +21,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/panel" element={<PrivateRoute element={<RideBookingPanel />} />} />
-          <Route path="/envios" element={<PrivateRoute element={<Envios />} />} />
+          
         </Routes>
       </LocalizationProvider>
     </ClerkProvider>
