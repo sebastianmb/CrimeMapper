@@ -7,22 +7,13 @@ const Order = require('../models/Order');
 // Crear un nuevo pedido
 const createOrder = async (req, res) => {
     console.log('Request Body:', req.body);
-    const { pickupDateTime, pickupLocation, waypoints, deliveryDestination, recipientName, recipientPhone, recipientEmail, courierInstructions, packageSize, declaredValue, packageWeight,user,precioEnvio,status } = req.body;
+    const { pickupDateTime, pickupLocation, courierInstructions, user,status } = req.body;
     try {
         const order = new Order({
             pickupDateTime,
             pickupLocation,
-            waypoints,
-            deliveryDestination,
-            recipientName,
-            recipientPhone,
-            recipientEmail,
             courierInstructions,
-            packageSize,
-            declaredValue,
-            packageWeight,
             user,
-            precioEnvio, // Añadido precio de envío
             status // Añadido estado del pedido
         });
         await order.save();

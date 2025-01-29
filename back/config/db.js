@@ -5,7 +5,7 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        console.log('MongoDB connected');
+        console.log('MongoDB crimemapper connected');
     } catch (error) {
         console.error(error.message);
         process.exit(1);

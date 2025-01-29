@@ -19,8 +19,7 @@ router.route('/:id')
 router.route('/all-orders')
     .get( validateCourierToken,getAllOrders);
 
-// Ruta para aceptar un pedido
-router.route('/accept-order/:id').post(validateCourierToken, acceptOrder);
+
 
 // Exporta el enrutador
 module.exports = router;
