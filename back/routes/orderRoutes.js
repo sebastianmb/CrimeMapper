@@ -17,7 +17,7 @@ router.route('/:id')
 
 // Ruta para repartidores (consulta de todos los pedidos)
 router.route('/all-orders')
-    .get( validateCourierToken,getAllOrders);
+    .get( requireAuth,getAllOrders);
 
 
 

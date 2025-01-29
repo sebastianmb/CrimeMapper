@@ -27,7 +27,7 @@ const createOrder = async (req, res) => {
 const getOrders = async (req, res) => {
     try {
         console.log("User ID:", req.user); // Muestra el ID del usuario autenticado
-
+        
 
         // Extrae el estado de los parámetros de consulta (query)
         const { status } = req.query;
@@ -43,6 +43,7 @@ const getOrders = async (req, res) => {
 
 
         res.status(200).json(orders);
+        
     } catch (error) {
         console.error('Error details:', error);
         res.status(500).json({ message: 'Error al obtener los pedidos' });
