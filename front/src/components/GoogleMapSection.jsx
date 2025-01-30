@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { DirectionsRenderer, GoogleMap, Marker, MarkerF, OverlayView, useJsApiLoader } from '@react-google-maps/api';
+import { DirectionsRenderer, GoogleMap, Marker, MarkerF,InfoWindow, OverlayView, useJsApiLoader } from '@react-google-maps/api';
 import { SourceContext } from "../context/SourceContext.js"
 import { DestinationContext } from '../context/DestinationContext.js';
 import { PickLocationContext } from '../context/PickLocationContext.js';
-import { WaypointContext } from '../context/WaypointsContext.js';
 
+import bandit from '../assets/images/bandit.png';
 import locationIcon from '../assets/images/location.png';
 import destinationIcon from '../assets/images/destination.png';
-
+import { useUser, useSession } from "@clerk/clerk-react";
 
 
 const containerStyle = {
@@ -26,14 +26,38 @@ function GoogleMapSection() {
 
   const { source, setSource } = useContext(SourceContext);
  
-  const { waypoint, setWaypoint } = useContext(WaypointContext)
+  
 
   const [center, setCenter] = useState({
     lat: 4.638662268473553,
     lng: -74.07824294099393
   });
+  const [crimeData, setCrimeData] = useState([]);
+  const [selectedCrime, setSelectedCrime] = useState(null);
+  const { session } = useSession()
 
   useEffect(() => {
+    const sessionId = session?.id;
+    const fetchCrimeData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/orders/all-orders', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${sessionId}`, // Reemplaza 'YOUR_AUTH_TOKEN' con tu token de autorización
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await response.json();
+        setCrimeData(data);
+        
+      } catch (error) {
+        console.error('Error fetching crime data:', error);
+      }
+    };
+
+    fetchCrimeData();
+
+
     if (source?.length != [] && map) {
 
       map.panTo(
@@ -80,7 +104,7 @@ function GoogleMapSection() {
 
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={11}
+      zoom={7}
       onLoad={map => setMap(map)}
 
       options={{
@@ -94,9 +118,36 @@ function GoogleMapSection() {
 
 
     >
-      {console.log("localizacion mapa",pickLocation)}
+      
 
       {/*pickLocation && <Marker position={pickLocation} />*/}
+
+      {crimeData.map((crime, index) => (
+        <Marker
+          key={index}
+          position={{ lat: crime.pickupLocation.lat, lng: crime.pickupLocation.lng }}
+          icon={{url:bandit,
+            scaledSize: {
+              width: 20,
+              height: 20
+            }
+          }}
+          title={crime.courierInstructions}
+          onClick={() => setSelectedCrime(crime)}
+        />
+      ))}
+      {selectedCrime && (
+        <InfoWindow
+          position={{ lat: selectedCrime.pickupLocation.lat, lng: selectedCrime.pickupLocation.lng }}
+          onCloseClick={() => setSelectedCrime(null)}
+        >
+          <div>
+            <h2>Descripción del Crimen</h2>
+            <p>{selectedCrime.courierInstructions}</p>
+          </div>
+        </InfoWindow>
+      )}
+      
 
       {source.length != [] ? <Marker
         position={{ lat: source.lat, lng: source.lng }}
@@ -143,28 +194,7 @@ function GoogleMapSection() {
 
       
 
-      {waypoint.length !== 0 && waypoint.map((waypoint, index) => (
-        <Marker
-          key={index}
-          position={{ lat: waypoint.lat, lng: waypoint.lng }}
-          icon={{
-            url: locationIcon,
-            scaledSize: {
-              width: 20,
-              height: 20
-            }
-          }}
-        >
-          <OverlayView
-            position={{ lat: waypoint.lat, lng: waypoint.lng }}
-            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          >
-            <div className='p-2 bg-white font-bold inline-block'>
-              <p className='text-black text-[18px]'>{waypoint.label}</p>
-            </div>
-          </OverlayView>
-        </Marker>
-      ))}
+      
 
       
 

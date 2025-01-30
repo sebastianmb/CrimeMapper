@@ -6,7 +6,7 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { SourceContext } from '../../context/SourceContext.js';
 import { DestinationContext } from '../../context/DestinationContext.js';
 import agregar from '../../assets/images/agregar.png'; // Ruta al archivo SVG del icono de ubicación
-import Waypoints from './Waypoints.jsx';
+
 
 function AutoCompleteAddres() {
 
