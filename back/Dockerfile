@@ -1,18 +1,17 @@
 # Usa una imagen base de Node.js
 FROM node:18
 
-
-# Establece el directorio de trabajo
+# Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia el package.json y el package-lock.json
-COPY package*.json ./
+# Copiar el package.json y package-lock.json (si existe) al contenedor
+COPY back/package*.json ./
 
-# Instala las dependencias
+# Instalar las dependencias
 RUN npm install
 
-# Copia el resto de la aplicación
-COPY . .
+# Copiar el resto de la aplicación
+COPY back/ ./
 
 # Expone el puerto en el que la aplicación se ejecuta
 EXPOSE 3001
