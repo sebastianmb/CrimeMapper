@@ -27,7 +27,7 @@ export const Navbar = () => {
         
         <li className='mb-8 sm:mb-0'>
           <SignedOut>
-            <SignInButton mode='modal' forceRedirectUrl='/Panel'>Registrarse</SignInButton>
+            <SignInButton mode='modal' forceRedirectUrl='/Panel'>Register</SignInButton>
           </SignedOut>
           <SignedIn>
             <UserButton />
