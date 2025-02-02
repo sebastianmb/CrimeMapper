@@ -4,25 +4,24 @@ FROM node:18
 # Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar package.json y package-lock.json (si existe) para instalar dependencias
-COPY package*.json ./
+# Copiar package.json y package-lock.json (si existe) desde la carpeta front
+COPY front/package*.json ./
 
-# Instalar las dependencias de tu proyecto
+# Instalar las dependencias del proyecto
 RUN npm install
 
-# Copiar el resto del código de la aplicación
-COPY . .
+# Copiar el resto del código del front al contenedor
+COPY front/ ./
 
 # Construir la aplicación con Vite (esto generará los archivos de producción)
 RUN npm run build
 
-# Instalar 'serve' de forma global
+# Instalar y usar 'serve' para servir los archivos estáticos
 RUN npm install -g serve
 
-# Exponer el puerto en el que la aplicación correrá
+# Exponer el puerto en el que correrá la aplicación
 EXPOSE 3000
 
-# Comando de inicio para servir la aplicación
-CMD ["serve", "-s", "dist", "-l", "3000"]
-
+# Comando por defecto para ejecutar el servidor
+CMD ["serve", "-s", "dist"]
 
