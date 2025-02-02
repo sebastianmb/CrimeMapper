@@ -1,36 +1,28 @@
 # Usar una imagen base de Node.js
-FROM node:18 AS build
+FROM node:18
 
 # Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar package.json y package-lock.json desde la carpeta front
-COPY front/package*.json ./
+# Copiar package.json y package-lock.json (si existe) para instalar dependencias
+COPY package*.json ./
 
-# Instalar dependencias
+# Instalar las dependencias de tu proyecto
 RUN npm install
 
-# Copiar el resto del código del frontend
-COPY front/ ./
+# Copiar el resto del código de la aplicación
+COPY . .
 
-# Construir la aplicación con Vite
+# Construir la aplicación con Vite (esto generará los archivos de producción)
 RUN npm run build
 
-# --------------------
-# Fase final: Servidor Nginx para producción
-# --------------------
-FROM nginx:alpine
+# Instalar 'serve' de forma global
+RUN npm install -g serve
 
-# Copiar los archivos generados en la fase de build al directorio de Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
+# Exponer el puerto en el que la aplicación correrá
+EXPOSE 3000
 
-# Exponer el puerto en el que servirá Nginx
-EXPOSE 80
-
-# Comando por defecto para iniciar Nginx
-CMD ["nginx", "-g", "daemon off;"]
-
-
-# Iniciar la aplicación usando 'serve' para servir la carpeta 'dist'
+# Comando de inicio para servir la aplicación
 CMD ["serve", "-s", "dist", "-l", "3000"]
+
 
