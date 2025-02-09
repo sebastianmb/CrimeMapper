@@ -1,20 +1,26 @@
-# Usa una imagen base de Node.js
+# Usar una imagen base de Node.js
 FROM node:18
 
 # Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar el package.json y package-lock.json (si existe) al contenedor
-COPY back/package*.json ./
+# Copiar package.json y package-lock.json (si existe) para instalar dependencias
+COPY package*.json ./
 
-# Instalar las dependencias
+# Instalar las dependencias de tu proyecto
 RUN npm install
 
-# Copiar el resto de la aplicación
-COPY back/ ./
+# Copiar el resto del código de la aplicación
+COPY . .
 
-# Expone el puerto en el que la aplicación se ejecuta
-EXPOSE 3001
+# Construir la aplicación con Vite (esto generará los archivos de producción)
+RUN npm run build
 
-# Comando para iniciar la aplicación
-CMD ["npm", "start"]
+# Instalar 'serve' de forma global
+RUN npm install -g serve
+
+# Exponer el puerto en el que la aplicación correrá
+EXPOSE 3000
+
+# Comando de inicio para servir la aplicación
+CMD ["serve", "-s", "dist", "-l", "3000"]
