@@ -14,7 +14,10 @@ export function App() {
   if (!PUBLISHABLE_KEY) {
     throw new Error("Missing Publishable Key");
   }
+  // Agregar el console.log para verificar el valor de la clave
+  console.log("Clerk Publishable Key:", PUBLISHABLE_KEY);
 
+  
   return (
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
