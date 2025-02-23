@@ -4,22 +4,22 @@ import { SourceContext } from '../../context/SourceContext';
 
 import { PickLocationContext } from '../../context/PickLocationContext.js';
 import dayjs from 'dayjs';
-import { useUser, useSession } from "@clerk/clerk-react";
+
 import axios from 'axios';
 
 const SubmitButton = ({ date, formData }) => {
   const { pickLocation } = useContext(PickLocationContext);
   const { mensaje } = useContext(InfoPackageContext);
-  const {  user } = useUser();
+  
   const { source } = useContext(SourceContext);
   
-  const { session } = useSession()
+
 
   const handleSubmit = async () => {
-    const sessionId = session?.id; // Esto obtiene el ID de la sesión directamente
+   
     const formattedDate = date ? dayjs(date).format('YYYY-MM-DD HH:mm:ss') : null;
     let pickupLocation;
-    if (source && Object.keys(source).length !== 0) {
+    if (source ) {
       pickupLocation = source;
     } else if (pickLocation && pickLocation.lat && pickLocation.lng) {
       pickupLocation = {
@@ -49,7 +49,7 @@ const SubmitButton = ({ date, formData }) => {
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${sessionId}`,  // Reemplaza `sessionId` con tu token
+            'Authorization': `Bearer `,  // Reemplaza `sessionId` con tu token
           },
         }
       );

@@ -7,7 +7,7 @@ import { PickLocationContext } from '../context/PickLocationContext.js';
 import bandit from '../assets/images/bandit.png';
 import locationIcon from '../assets/images/location.png';
 import destinationIcon from '../assets/images/destination.png';
-import { useUser, useSession } from "@clerk/clerk-react";
+
 
 
 const containerStyle = {
@@ -34,10 +34,10 @@ function GoogleMapSection() {
   });
   const [crimeData, setCrimeData] = useState([]);
   const [selectedCrime, setSelectedCrime] = useState(null);
-  const { session } = useSession()
+ 
 
   useEffect(() => {
-    const sessionId = session?.id;
+   
     const fetchCrimeData = async () => {
       try {
         const response = await fetch('https://crimemapper-cz6l.onrender.com/api/orders/all-orders', {

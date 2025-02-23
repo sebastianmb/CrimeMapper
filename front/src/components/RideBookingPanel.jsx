@@ -1,12 +1,12 @@
 import { Header } from "./Header"
 import { Map } from "./Map"
 import { Booking } from "./Booking/Booking"
-import imageDesktop from '../assets/images/image-web-3-desktop-.jpg'
 import { SourceContext } from "../context/SourceContext.js"
 import { useState } from "react"
 import { DestinationContext } from "../context/DestinationContext.js"
-import GoogleMapSection from "./GoogleMapSection.jsx"
 import { LoadScript } from "@react-google-maps/api"
+import GoogleMapSection from "./GoogleMapSection.jsx"
+
 import { PickLocationContext } from "../context/PickLocationContext.js"
 
 import { InfoPackageProvider } from '../context/InfoPackageContext';

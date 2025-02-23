@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
+
 import { Link } from 'react-router-dom';
 //import { UserContext } from '../context/UserContext';
 
@@ -9,7 +9,7 @@ import closeBtn from '../assets/images/icon-menu-close.svg'
 export const Navbar = () => {
 
   //const { userapp, setUserapp } = useContext(UserContext);
-  //const clerkUser = useUser();
+ 
 
 
   const [menuClicked, setMenuClicked] = useState(true)
@@ -26,12 +26,8 @@ export const Navbar = () => {
         </li>
         
         <li className='mb-8 sm:mb-0'>
-          <SignedOut>
-            <SignInButton mode='modal' forceRedirectUrl='/Panel'>Register</SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
+          <button >Register</button>
+          
           {
             //<button className='px-[12px] py-[10px] rounded-[30px] hover:bg-cyan-700' href="#">Registrate</button>
           }
