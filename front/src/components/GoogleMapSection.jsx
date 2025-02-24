@@ -40,12 +40,12 @@ function GoogleMapSection() {
    
     const fetchCrimeData = async () => {
       try {
-        const response = await fetch('https://crimemapper-cz6l.onrender.com/api/orders/all-orders', {
+        const response = await fetch('http://localhost:3001/api/orders/all-orders', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${sessionId}`, // Reemplaza 'YOUR_AUTH_TOKEN' con tu token de autorización
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           }
+          
         });
         const data = await response.json();
         setCrimeData(data);
