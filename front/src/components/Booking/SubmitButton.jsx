@@ -38,18 +38,18 @@ const SubmitButton = ({ date, formData }) => {
       pickupDateTime: formattedDate,
       pickupLocation: pickupLocation,
       courierInstructions: mensaje,
-      user: user.id,
+      //user: user.id,
       status:'Pendiente'
     };
     console.log("source es:",source)
     console.log('Payload:', payload);
 
     try {
-      const response = await axios.post('https://crimemapper-cz6l.onrender.com/api/orders', payload,
+      const response = await axios.post('http://localhost:3001/api/orders', payload,
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer `,  // Reemplaza `sessionId` con tu token
+              // Reemplaza `sessionId` con tu token
           },
         }
       );
